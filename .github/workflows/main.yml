@@ -6,6 +6,7 @@ on:
     branches: [ "dev", "main", "fastlane-ios", "test_workflow", "github-ci" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 permissions:
   contents: write
