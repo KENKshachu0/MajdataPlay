@@ -116,8 +116,16 @@ namespace MajdataPlay.Scenes.View
         }
         void Start()
         {
+            // The WebSocket server used by MajdataEdit is not part of the
+            // production View scene in current releases. Create it here so
+            // every normal play session exposes ws://127.0.0.1:8083/majdata.
+            if (Majdata<WsServer>.Instance is null)
+            {
+                var wsServerObject = new GameObject("WsServer");
+                wsServerObject.AddComponent<WsServer>();
+            }
+
             _bgManager = Majdata<BGManager>.Instance!;
-            //_httpServer = Majdata<WsServer>.Instance!;
             _noteLoader = Majdata<NoteLoader>.Instance!;
             _noteManager = Majdata<NoteManager>.Instance!;
             _noteAudioManager = Majdata<NoteAudioManager>.Instance!;
