@@ -26,7 +26,7 @@ jobs:
   build:
     name: Build (Windows/Linux)
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     strategy:
       fail-fast: false
       matrix:
@@ -89,7 +89,7 @@ jobs:
   build-android:
     name: Build (Android)
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     env:
       CONFIGURATION: Release
       TARGET_PLATFORM: Android
@@ -364,7 +364,7 @@ jobs:
   build-apple:
     name: Build (macOS/iOS)
     runs-on: macos-26
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     strategy:
       fail-fast: false
       matrix:
@@ -612,7 +612,7 @@ jobs:
   publish-nightly:
     name: Publish nightly release (replace only after all builds succeed)
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     needs: [build, build-android, build-apple]
 
     steps:
